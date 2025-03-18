@@ -17,9 +17,6 @@ typedef enum capture_tn {
   CHARPTR
 } capture_tn;
 
-// Representation of a single captured variable
-//
-// It's basically just a tagged union!
 typedef struct capture_t {
   capture_tn cap_typename;
   union {
@@ -32,14 +29,11 @@ typedef struct capture_t {
   } cap_thing;
 } capture_t;
 
-// The actual closure type
-//
-// This is just a function pointer and the surrounding metadata;
-// with this we can make the necessary call
 typedef void (*func_t)(void);
 typedef struct closure_t {
   size_t clo_id;
   func_t clo_fn;
+  size_t clo_captures_n;
   capture_t *clo_captures;
 } closure_t;
 

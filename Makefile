@@ -1,5 +1,5 @@
 CC					= gcc
-D_FLAGS				= -Wall -Wextra -O0 -g -std=c99 -fsanitize=address,undefined
+D_FLAGS				= -Wall -Wextra -O0 -g -std=c99
 R_FLAGS				=
 
 TARGET				= target
