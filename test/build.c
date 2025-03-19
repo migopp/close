@@ -29,7 +29,7 @@ int main(void) {
     exit(-1);
   }
 
-  printf(BLUE "3: " RESET " Running `test`\n");
+  printf(BLUE "3: " RESET "Running `test`\n");
   const char *cmd_run_test = "./bin/test";
   rc = system(cmd_run_test);
   if (rc < 0) {

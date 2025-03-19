@@ -5,13 +5,39 @@
 
 static size_t closure_id = 0;
 
+// TODO: Support of custom types
 capture_t init_capture(capture_tn type, void *c) {
-  capture_t n_capture;
-  if (type == UINT32) {
-    n_capture.cap_typename = UINT32;
-    n_capture.cap_thing.u32 = *(uint32_t *)c;
+  capture_t capture;
+  capture.cap_typename = type;
+  switch (type) {
+  case UINT8: {
+    capture.cap_thing.u8 = *(uint8_t *)c;
+    break;
   }
-  return n_capture;
+  case UINT16: {
+    capture.cap_thing.u16 = *(uint16_t *)c;
+    break;
+  }
+  case UINT32: {
+    capture.cap_thing.u32 = *(uint32_t *)c;
+    break;
+  }
+  case UINT64: {
+    capture.cap_thing.u64 = *(uint64_t *)c;
+    break;
+  }
+  case VOIDPTR: {
+    capture.cap_thing.v = c;
+    break;
+  }
+  case CHARPTR: {
+    capture.cap_thing.c = (char *)c;
+    break;
+  }
+  default:
+    break;
+  }
+  return capture;
 }
 
 void deinit_capture() {}
@@ -37,10 +63,9 @@ closure_t init_closure(func_t fn, size_t caps, ...) {
 
 void deinit_closure(closure_t c) { free(c.clo_captures); }
 
+// TODO: More arguments; tc3
 void call_closure(closure_t c) {
-  printf("*** Calling closure %zu\n", c.clo_id);
   if (c.clo_captures_n > 0) {
-    printf("*** With capture: %d\n", c.clo_captures[0].cap_thing.u32);
     __asm__ volatile("mov %0, %%rdi;"
                      :
                      : "r"(c.clo_captures[0].cap_thing)

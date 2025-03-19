@@ -8,6 +8,8 @@
 //
 // NOTE: Right now this is rather limited for simplicity of implementation,
 // however it could be expanded if needed
+//
+// TODO: Support of custom types (`UDEF`)
 typedef enum capture_tn {
   UINT8,
   UINT16,
@@ -37,10 +39,22 @@ typedef struct closure_t {
   capture_t *clo_captures;
 } closure_t;
 
+// Inititates a variable capture
 capture_t init_capture(capture_tn, void *);
+
+// Deinitiates a variable capture and frees associated allocation(s)
 void deinit_capture();
+
+// Initiates a closure
+//
+// Takes in a function pointer, a number of captures, and the actual captured
+// values
 closure_t init_closure(func_t, size_t, ...);
+
+// Deinitiates a closure and frees associated allocation(s)
 void deinit_closure(closure_t);
+
+// Invokes a call to the closure passed in
 void call_closure(closure_t);
 
 #endif // !CLOSE
