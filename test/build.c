@@ -1,3 +1,12 @@
+// Experiementing with native build systems...
+//
+// Yes, I know that done as is, this is sorta stupid, but the idea is
+// that this file can be compiled with `cc -o build build.c` and then
+// it builds the test file.
+//
+// Perhaps a similar idea would be idea for building everything, as
+// then the only dependency for building is `cc` itself...
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -32,7 +41,7 @@ int main(void) {
   printf(BLUE "3: " RESET "Running `test`\n");
   const char *cmd_run_test = "./bin/test";
   rc = system(cmd_run_test);
-  if (rc < 0) {
+  if (rc != 0) {
     fprintf(stderr, RED "FAILURE: " RESET "Run of `test` failed, aborting...");
     exit(-1);
   }

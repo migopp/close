@@ -3,9 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static size_t closure_id = 0;
-
-// TODO: Support of custom types
 capture_t init_capture(capture_tn type, void *c) {
   capture_t capture;
   capture.cap_typename = type;
@@ -46,7 +43,6 @@ closure_t init_closure(func_t fn, size_t caps, ...) {
   va_list args;
   va_start(args, caps);
   closure_t closure;
-  closure.clo_id = closure_id++;
   closure.clo_fn = fn;
   closure.clo_captures_n = caps;
   capture_t *capture_space = NULL;
@@ -70,6 +66,41 @@ void call_closure(closure_t c) {
                      :
                      : "r"(c.clo_captures[0].cap_thing)
                      : "%rdi");
+  }
+  if (c.clo_captures_n > 1) {
+    __asm__ volatile("mov %0, %%rsi;"
+                     :
+                     : "r"(c.clo_captures[1].cap_thing)
+                     : "%rsi");
+  }
+  if (c.clo_captures_n > 2) {
+    __asm__ volatile("mov %0, %%rdx;"
+                     :
+                     : "r"(c.clo_captures[2].cap_thing)
+                     : "%rdx");
+  }
+  if (c.clo_captures_n > 3) {
+    __asm__ volatile("mov %0, %%rcx;"
+                     :
+                     : "r"(c.clo_captures[3].cap_thing)
+                     : "%rcx");
+  }
+  if (c.clo_captures_n > 4) {
+    __asm__ volatile("mov %0, %%r8;"
+                     :
+                     : "r"(c.clo_captures[4].cap_thing)
+                     : "%r8");
+  }
+  if (c.clo_captures_n > 5) {
+    __asm__ volatile("mov %0, %%r9;"
+                     :
+                     : "r"(c.clo_captures[5].cap_thing)
+                     : "%r9");
+  }
+  if (c.clo_captures_n > 6) {
+    for (size_t i = c.clo_captures_n - 1; i > 5; --i) {
+      __asm__ volatile("push %0;" : : "r"(c.clo_captures[i].cap_thing) :);
+    }
   }
   c.clo_fn();
 }

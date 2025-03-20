@@ -8,8 +8,6 @@
 //
 // NOTE: Right now this is rather limited for simplicity of implementation,
 // however it could be expanded if needed
-//
-// TODO: Support of custom types (`UDEF`)
 typedef enum capture_tn {
   UINT8,
   UINT16,
@@ -33,7 +31,6 @@ typedef struct capture_t {
 
 typedef void (*func_t)(void);
 typedef struct closure_t {
-  size_t clo_id;
   func_t clo_fn;
   size_t clo_captures_n;
   capture_t *clo_captures;
