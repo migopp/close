@@ -42,7 +42,8 @@ int main(void) {
   const char *cmd_run_test = "./bin/test";
   rc = system(cmd_run_test);
   if (rc != 0) {
-    fprintf(stderr, RED "FAILURE: " RESET "Run of `test` failed, aborting...");
+    fprintf(stderr,
+            RED "FAILURE: " RESET "Run of `test` failed, aborting...\n");
     exit(-1);
   }
 
