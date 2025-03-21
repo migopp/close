@@ -1,6 +1,6 @@
 #include "close.h"
 #include <stdarg.h>
-#include <stdio.h>
+// Can use custom heap allocator in place...
 #include <stdlib.h>
 
 capture_t init_capture(capture_tn type, void *c) {
