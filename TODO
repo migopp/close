@@ -1,0 +1,8 @@
+######### TODO #########
+
+[ ] Add special `UDEF` `capture_tn` property
+	[ ] Possible without pointers? Worth it?
+	[ ] Update README
+	[ ] Update tests
+
+[ ] Add more `capture_tn` types generally
