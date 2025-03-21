@@ -13,7 +13,7 @@ If it were implemented with off-level threads, there may be some work the main t
 
 ```c
 void off_level_handler_work(void) {
-    closure_t *to_do = poll(work_queue);
+    closure_t to_do = poll(work_queue);
     call_closure(to_do);
     // ...
     context_switch(me, to);
