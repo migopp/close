@@ -2,6 +2,9 @@
 
 Simulated closures in C.
 
+[![CI](https://github.com/migopp/close/actions/workflows/ci.yml/badge.svg)](https://github.com/migopp/close/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## Closures
 
 Closures are an incredibly useful language feature, even in the context of lower-level programming.
