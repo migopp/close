@@ -1,5 +1,7 @@
 ######### TODO #########
 
+[ ] Rewrite with GCC statement exprs
+
 [ ] Add special `UDEF` `capture_tn` property
 	[ ] Possible without pointers? Worth it?
 	[ ] Update README
